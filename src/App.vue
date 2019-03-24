@@ -48,6 +48,7 @@
     /* 固定头部组件默认脱离文档流，后面的元素会挤上来，通过给外部div设置padding来解决 */
     .app-container {
         padding-top: 40px;
+		padding-bottom: 50px;
 		/* 解决组件切换时横向滚动条问题 */
 		overflow-x: hidden;
     }
