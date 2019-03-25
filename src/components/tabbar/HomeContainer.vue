@@ -17,37 +17,37 @@
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <router-link to="/home/newslist">
-                    <img src="../../images/menu1.png" alt="">
+                    <img src="../../images/menu1.png" alt>
                     <div class="mui-media-body">新闻资讯</div>
                 </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
-                    <img src="../../images/menu2.png" alt="">
+                <router-link to="/home/photolist">
+                    <img src="../../images/menu2.png" alt>
                     <div class="mui-media-body">图片分享</div>
-                </a>
+                </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
-                    <img src="../../images/menu3.png" alt="">
+                    <img src="../../images/menu3.png" alt>
                     <div class="mui-media-body">商品购买</div>
                 </a>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
-                    <img src="../../images/menu4.png" alt="">
+                    <img src="../../images/menu4.png" alt>
                     <div class="mui-media-body">留言反馈</div>
                 </a>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
-                    <img src="../../images/menu5.png" alt="">
+                    <img src="../../images/menu5.png" alt>
                     <div class="mui-media-body">视频专区</div>
                 </a>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
-                    <img src="../../images/menu6.png" alt="">
+                    <img src="../../images/menu6.png" alt>
                     <div class="mui-media-body">联系我们</div>
                 </a>
             </li>
@@ -87,6 +87,19 @@ export default {
 
 
 <style scoped>
+/* 设置六宫格背景，交集选择器 */
+.mui-grid-view.mui-grid-9 {
+    background-color: #fff;
+}
+/* 取消六宫格默认的边框 */
+.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+    border: 0;
+}
+/* 设置六宫格内图片大小 */
+.mui-grid-view.mui-grid-9 .mui-table-view-cell img {
+    width: 60px;
+    height: 60px;
+}
 /* 给轮播图容器设置一个高度，(默认高度为0无法显示) */
 .mint-swipe {
     height: 200px;
@@ -95,19 +108,6 @@ export default {
 .mint-swipe-item img {
     width: 100%;
     height: 100%;
-}
-/* 设置六宫格背景颜色 */
-.mui-grid-view.mui-grid-9 {
-    background-color: #fff;
-}
-/* 取消六宫格内的默认边框 */
-.mui-grid-view.mui-grid-9 .mui-table-view-cell {
-    border: 0;
-}
-/* 设置六宫格内图片大小 */
-.mui-grid-view.mui-grid-9 img {
-    width: 60px;
-    height: 60px;
 }
 
 /* 分别设置每一张图片的背景颜色

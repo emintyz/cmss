@@ -3,13 +3,13 @@
     <div class="newsinfo-container">
         <h3 class="title">{{ newsinfo.title }}</h3>
         <p class="subtitle">
-            <span>发表时间：{{ newsinfo.add_time | dataFormat }}</span>
+            <span>发表时间：{{ newsinfo.add_time | dateFormat }}</span>
             <span>点击： {{ newsinfo.click }}次</span>
         </p>
         <hr>
         <div class="content" v-html="newsinfo.content"></div>
         <!-- 评论子组件 -->
-        <comment-box></comment-box>
+        <comment-box :id="this.id"></comment-box>
     </div>
 </template>
 
@@ -23,10 +23,10 @@ export default {
         return {
             id: this.$route.params.id,  //将URL地址中传递过来的id值挂载到data中，方便调用
             newsinfo: {        //新闻对象
-                title: '电子与电气工程学院',
-                add_time: new Date(),
-                click: 86,
-                content: '这是主要内容这是主要内容这是主要内容这是主要内容这是主要内容 这是主要内容这是主要内容这是主要内容这是主要内容这是主要内容'
+                'title': '电子与电气工程学院',
+                'add_time': new Date(),
+                'click': 86,
+                'content': '这是主要内容这是主要内容这是主要内容这是主要内容这是主要内容 这是主要内容这是主要内容这是主要内容这是主要内容这是主要内容'
             }
         }
     },
