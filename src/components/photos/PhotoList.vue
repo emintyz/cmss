@@ -66,11 +66,11 @@ export default {
     methods: {
         // 获取所有的图片分类
         getAllCategory (){
-            this.$http.get('').then(result => {
-                if(result.body.status === 0) {
-                    this.cates = result.body.message.unshift({title: '全部',id: 0})
-                }
-            })
+            // this.$http.get('').then(result => {
+            //     if(result.body.status === 0) {
+            //         this.cates = result.body.message.unshift({title: '全部',id: 0})
+            //     }
+            // })
         },
         // 根据id获取图片列表
         getPhotoList (cateid){

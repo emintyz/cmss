@@ -1,17 +1,7 @@
 <template>
     <div>
-        <!-- 轮播图 -->
-        <mt-swipe :auto="4000">
-            <mt-swipe-item>
-                <img src="../../images/l1.jpg" alt>
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <img src="../../images/l2.jpg" alt>
-            </mt-swipe-item>
-            <mt-swipe-item>
-                <img src="../../images/l3.jpg" alt>
-            </mt-swipe-item>
-        </mt-swipe>
+        <!-- 轮播图,传递图片数据 -->
+        <swiper :lunbotuList="lunbotuList" :isfull='true'></swiper>
 
         <!-- 六宫格 -->
         <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -28,10 +18,10 @@
                 </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
+                <router-link to="/home/goodslist">
                     <img src="../../images/menu3.png" alt>
                     <div class="mui-media-body">商品购买</div>
-                </a>
+                </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
@@ -57,7 +47,9 @@
 
 
 <script>
-import { Toast } from "mint-ui";
+import { Toast } from "mint-ui"
+// 导入轮播图
+import swiper from '../subcomponents/swiper.vue'
 export default {
     data() {
         return {
@@ -81,6 +73,10 @@ export default {
             //     }
             // })
         }
+    },
+    // 注册轮播图子组件
+    components: {
+        swiper: swiper
     }
 };
 </script>
@@ -100,15 +96,7 @@ export default {
     width: 60px;
     height: 60px;
 }
-/* 给轮播图容器设置一个高度，(默认高度为0无法显示) */
-.mint-swipe {
-    height: 200px;
-}
-/* 设置轮播图片的大小 */
-.mint-swipe-item img {
-    width: 100%;
-    height: 100%;
-}
+
 
 /* 分别设置每一张图片的背景颜色
     .mint-swipe-item:nth-child(1) {

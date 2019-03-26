@@ -4,7 +4,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --hot"
+    "dev": "webpack-dev-server --open --hot --port 3000 --host 192.168.155.1"
   },
   "keywords": [],
   "author": "",
