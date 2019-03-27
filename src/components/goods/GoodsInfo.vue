@@ -1,6 +1,11 @@
 <template>
     <!-- 商品详情页面 -->
     <div class="goodsinfo-container">
+        <!-- 小球动画 -->
+            <transition @before-enter="beforeEnter"
+                @enter="enter" @after-enter="afterEnter">
+                <div class="ball" v-show="ballFlag" ref="ball"></div>
+            </transition>
         <!-- 商品轮播图 -->
         <div class="mui-card">
             <div class="mui-card-content">
@@ -21,14 +26,11 @@
                     </p>
                     <div class="count">
                         购买数量：
-                        <div class="mui-numbox" data-numbox-min="1" data-numbox-max="9">
-                            <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-                            <input id="test" class="mui-input-numbox" type="number" value="1">
-                            <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
-                        </div>
+                        <!-- 数量选择子组件 -->
+                        <numbox @getCount="getSelectedCount" :max="goodsinfo.goods_quantity"></numbox>
                     </div>
                     <mt-button type="primary" size="small">立即购买</mt-button>
-                    <mt-button type="danger" size="small">加入购物车</mt-button>
+                    <mt-button type="danger" size="small" @click="addToShopCar">加入购物车</mt-button>
                 </div>
             </div>
         </div>
@@ -53,8 +55,9 @@
 <script>
 // 导入轮播图
 import swiper from "../subcomponents/swiper.vue";
-// 导入mui
-import mui from  '../../lib/mui/css/mui.min.css'
+// 导入数量选择子组件
+import goodsinfo_numbox from "../subcomponents/goodsinfo_numbox.vue";
+
 export default {
     data() {
         return {
@@ -65,13 +68,12 @@ export default {
                 goods_no: 120545321854,
                 goods_quantity: 60,
                 goods_add_time: '2018-12-30 12:36:26'
-            }
+            },
+            ballFlag: false,
+            selectedCount: 1
         }
     },
-    mounted (){
-        // 初始化数字选择框
-        // mui(".mui-numbox").numbox()
-    },
+    
     methods: {
         getLunBoTu() {
             // this.$http.get('').then(result => {
@@ -91,16 +93,51 @@ export default {
         // 跳转到商品评论
         goComment (id){
             this.$router.push({name: 'goodscomment',params: {id} })
+        },
+        // 加入购物车，控制小球动画
+        addToShopCar (){
+            this.ballFlag = !this.ballFlag 
+        },
+        // 加入购物车小球动画
+        beforeEnter (el){
+            el.style.transform = "translate(0px,0px)"
+        },
+        enter (el,done){
+            // 获取小球的位置
+            const ballPosition = this.$refs.ball.getBoundingClientRect();
+            // 获取购物车徽标的位置
+            const badgePosition = document.getElementById("badge").getBoundingClientRect();
+            // 计算相对位置
+            var xDist = badgePosition.left - ballPosition.left;
+            var yDist = badgePosition.top - ballPosition.top;
+            
+            el.offsetWidth;
+            // 根据相对位置移动小球
+            el.style.transform = "translate("+xDist+"px,"+yDist+"px)";
+            // cubic-bezier(.4,-0.3,1,.68)是一种动画效果
+            el.style.transition = "all 0.5s cubic-bezier(.4,-0.3,1,.68)"
+            done()
+        },
+        afterEnter (el){
+            this.ballFlag = !this.ballFlag
+        },
+        // 组件传值
+        getSelectedCount (count){
+            this.selectedCount = count
         }
     },
-    // 注册轮播图
+    // 注册子组件
     components: {
-        swiper: swiper
+        swiper: swiper,
+        numbox:goodsinfo_numbox
     }
 };
 </script>
 
 <style scoped>
+.goodsinfo-container {
+    position: relative;
+}
 .mui-card-content-inner .price {
     color: #000;
 }
@@ -109,7 +146,9 @@ export default {
     color: red;
 }
 .mui-card-content-inner .count {
+    display: flex;
     color: #000;
+    line-height: 30px;
     margin-bottom: 8px;
 }
 /* 取消页尾默认的flex布局 */
@@ -118,6 +157,16 @@ export default {
 }
 .mui-card-footer button {
     margin-bottom: 10px;
+}
+.goodsinfo-container .ball {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: red;
+    z-index: 99;
+    position: absolute;
+    top: 310px;
+    left: 150px;
 }
 </style>
 
