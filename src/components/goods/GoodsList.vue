@@ -2,7 +2,7 @@
     <!-- 商品列表 -->
     <div class="goodslist-container">
         <!-- 编程式导航   goDetail(item.id) -->
-        <div class="goodslist-item" @click="goDetail">   
+        <router-link to="/home/goodsinfo/1" class="goodslist-item" >   
             <img src="../../images/m1.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -15,8 +15,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">  
+        </router-link>
+         <router-link to="/home/goodsinfo/2" class="goodslist-item" >  
             <img src="../../images/m2.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -29,8 +29,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">   
+        </router-link>
+         <router-link to="/home/goodsinfo/3" class="goodslist-item" >   
             <img src="../../images/m3.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -43,8 +43,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">   
+        </router-link>
+         <router-link to="/home/goodsinfo/4" class="goodslist-item" >   
             <img src="../../images/m4.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -57,8 +57,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">   
+        </router-link>
+         <router-link to="/home/goodsinfo/5" class="goodslist-item" >   
             <img src="../../images/m5.jpg" alt="">
             <h3 class="title">华为麦芒五华为麦芒五华为麦芒五华为麦芒五华为麦芒五</h3>
             <div class="info">
@@ -71,8 +71,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">   
+        </router-link>
+         <router-link to="/home/goodsinfo/6" class="goodslist-item" >   
             <img src="../../images/m6.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -85,8 +85,8 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
-         <div class="goodslist-item" @click="goDetail">   
+        </router-link>
+         <router-link to="/home/goodsinfo/7" class="goodslist-item" >   
             <img src="../../images/m7.jpg" alt="">
             <h3 class="title">华为麦芒五</h3>
             <div class="info">
@@ -99,7 +99,7 @@
                     <span>剩余25件</span>
                 </p>
             </div>
-        </div>
+        </router-link>
         
         <!-- 加载更多按钮 -->
         <mt-button type="danger" size="large">加载更多</mt-button>
@@ -111,7 +111,9 @@
 export default {
     // 省略获取数据的过程。。。
     data (){
-        return {}
+        return {
+            item: {id: 2}
+        }
     },
     methods: {
         // 使用vue-router实例编程式导航
@@ -121,7 +123,7 @@ export default {
             // this.$router是一个路由导航对象，用它可以方便的使用js代码，实现路由的前进、后退、跳转到URL地址
             
             // 1、传递字符串
-            this.$router.push('/home/goodsinfo/' + id)
+            // this.$router.push('/home/goodsinfo/' + id)
             // 2、传递对象
             // this.$router.push( { path: '/home/goodsinfo/' + id } )
             // 3、传递命名的路由--需要给路由添加name属性

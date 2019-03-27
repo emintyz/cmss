@@ -22,7 +22,7 @@
                         市场价：
                         <del>￥2999</del>&nbsp;&nbsp;&nbsp;&nbsp;
                         销售价：
-                        <span class="new">￥2199</span>
+                        <span class="new">￥{{ goodsinfo.goods_price }}</span>
                     </p>
                     <div class="count">
                         购买数量：
@@ -65,6 +65,7 @@ export default {
             lunbotuList: [],
             goodsinfo: {
                 title: '华为Mate20 Pro',
+                goods_price: 2199,
                 goods_no: 120545321854,
                 goods_quantity: 60,
                 goods_add_time: '2018-12-30 12:36:26'
@@ -73,7 +74,9 @@ export default {
             selectedCount: 1
         }
     },
-    
+    created(){
+        console.log(this.id)
+    },
     methods: {
         getLunBoTu() {
             // this.$http.get('').then(result => {
@@ -94,9 +97,17 @@ export default {
         goComment (id){
             this.$router.push({name: 'goodscomment',params: {id} })
         },
-        // 加入购物车，控制小球动画
+        // 加入购物车
         addToShopCar (){
             this.ballFlag = !this.ballFlag 
+            // 组成一个对象
+            var goodsBuy = {
+                id: this.id,
+                count: this.selectedCount,
+                price: this.goodsinfo.goods_price,
+                selected: true
+            }
+            this.$store.commit('addToCar',goodsBuy)
         },
         // 加入购物车小球动画
         beforeEnter (el){
@@ -146,7 +157,6 @@ export default {
     color: red;
 }
 .mui-card-content-inner .count {
-    display: flex;
     color: #000;
     line-height: 30px;
     margin-bottom: 8px;

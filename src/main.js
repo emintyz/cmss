@@ -52,11 +52,57 @@ Vue.http.options.emulateJSON = true;
 import VuePreview from 'vue-preview' 
 Vue.use(VuePreview)
 
+
+// 导入vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+// 获取本地存储的car
+var car = JSON.parse(localStorage.getItem('car') || [] )
+// 创建Vuex实例
+var store = new Vuex.Store({
+    state: {
+        // 将购物车中的商品，用一个数组存储起来
+        car: car
+    },
+    mutations: {
+        // 加入购物车方法
+        addToCar (state,goodsinfo){
+            var flag = false
+            // 如果购物车里已经有了，就只增加数量
+            state.car.some(item => {
+                if(item.id == goodsinfo.id){
+                    item.count += parseInt(goodsinfo.count)
+                    flag = true
+                    return true
+                }
+            })
+            // 如果购物车里没有，则添加到数组中
+            if(flag == false){
+                state.car.push(goodsinfo)
+            }
+            // 在本地存储购物车数据
+            localStorage.setItem('car',JSON.stringify(state.car))
+        }
+    },
+    getters: {
+        // 实现购物车徽标的自动刷新
+        getAllCount(state){
+            var c = 0;
+            state.car.forEach(item => {
+                c += item.count
+            })
+            return c
+        }
+    }
+})
+
+
 // vm实例
 var vm = new Vue({
     el: '#app',
     data: {},
     methods: {},
     render: h => h(App),
-    router
+    router,
+    store
 })

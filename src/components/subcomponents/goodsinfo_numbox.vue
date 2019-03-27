@@ -1,11 +1,9 @@
 <template>
     <!-- 数量选择子组件 -->
-    <div>
-        <div class="mui-numbox" data-numbox-min="1" data-numbox-max="max">
-            <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-            <input id="test" class="mui-input-numbox" type="number" value="1" @change="postCount" ref="count">
-            <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
-        </div>
+    <div class="mui-numbox" data-numbox-min="1" data-numbox-max="max">
+        <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+        <input id="test" class="mui-input-numbox" type="number" value="1" @change="postCount" ref="count">
+        <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
     </div>
 </template>
 
