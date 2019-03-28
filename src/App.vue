@@ -2,7 +2,11 @@
     <div class="app-container">
         
         <!-- 顶部Header区域 -->
-        <mt-header fixed title="这个杀手不太冷"></mt-header>
+        <mt-header fixed title="这个杀手不太冷">
+			<span slot="left" @click="goBack" v-if="flag">
+    			<mt-button icon="back">返回</mt-button>
+			</span>
+		</mt-header>
         
         
         
@@ -42,8 +46,31 @@
 
 <script>
     export default {
-        
-    }
+		data (){
+			return {
+				flag: false
+			}
+		},
+		created (){
+			// 刷新页面立即判断地址，控制flag
+			this.flag = this.$route.path == "/home" ? false : true 
+		},
+        methods: {
+			goBack (){
+				this.$router.go(-1)
+			}
+		},
+		// 监听路由地址的变化，控制返回按钮的隐藏
+		watch: {
+			"$route.path": function (newVal,oldVal){
+				if(newVal === "/home"){
+					this.flag = false
+				} else {
+					this.flag = true
+				}
+			}
+		}
+	}
 </script>
 
 <style scoped>

@@ -57,12 +57,12 @@ Vue.use(VuePreview)
 import Vuex from 'vuex'
 Vue.use(Vuex)
 // 获取本地存储的car
-var car = JSON.parse(localStorage.getItem('car') || [] )
+var car1 = JSON.parse(localStorage.getItem('car') || [] )
 // 创建Vuex实例
 var store = new Vuex.Store({
     state: {
         // 将购物车中的商品，用一个数组存储起来
-        car: car
+        car: car1
     },
     mutations: {
         // 加入购物车方法
@@ -82,6 +82,36 @@ var store = new Vuex.Store({
             }
             // 在本地存储购物车数据
             localStorage.setItem('car',JSON.stringify(state.car))
+        },
+        // 修改购物车中商品的数量
+        updateGoodsCount (state,goodsinfo){
+            state.car.some(item => {
+                if(item.id == goodsinfo.id){
+                    item.count = parseInt(goodsinfo.count)
+                    return true
+                }
+            })
+            localStorage.setItem('car',JSON.stringify(state.car))
+        },
+        // 删除商品
+        removeFromCar (state,id){
+            state.car.some((item,i) => {
+                if(item.id == id){
+                    state.car.splice(i,1)
+                    return true
+                }
+            })
+            localStorage.setItem('car',JSON.stringify(state.car))
+        },
+        // 选中状态
+        updateGoodsSelected (state,info){
+            state.car.some(item => {
+                if(item.id == info.id){
+                    item.selected = info.selected
+                    return true
+                }
+            })
+            localStorage.setItem('car',JSON.stringify(state.car))
         }
     },
     getters: {
@@ -89,9 +119,41 @@ var store = new Vuex.Store({
         getAllCount(state){
             var c = 0;
             state.car.forEach(item => {
-                c += item.count
+                if(item.selected == true){
+                    c += item.count
+                }
             })
             return c
+        },
+        // 获取购物车商品的数量
+        getGoodsCount (state){
+            var o = {};
+            state.car.forEach(item => {
+                o[item.id] = item.count;
+            })
+            return o
+        },
+        // 获取选中状态
+        getGoodsSelected (state){
+            var s = {};
+            state.car.forEach(item => {
+                s[item.id] = item.selected
+            })
+            return s
+        },
+        // 计算总件数
+        getGoodsAmount (state){
+            var a = {
+                count: 0,
+                amount: 0
+            }
+            state.car.forEach(item => {
+                if(item.selected){
+                    a.count += item.count;
+                    a.amount += item.price * item.count;
+                }
+            })
+            return a
         }
     }
 })
