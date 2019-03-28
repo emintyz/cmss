@@ -57,7 +57,7 @@ Vue.use(VuePreview)
 import Vuex from 'vuex'
 Vue.use(Vuex)
 // 获取本地存储的car
-var car1 = JSON.parse(localStorage.getItem('car') || [] )
+var car1 = JSON.parse(localStorage.getItem('car')) || []
 // 创建Vuex实例
 var store = new Vuex.Store({
     state: {
