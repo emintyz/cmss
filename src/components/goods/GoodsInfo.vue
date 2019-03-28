@@ -74,9 +74,6 @@ export default {
             selectedCount: 1
         }
     },
-    created(){
-        console.log(this.id)
-    },
     methods: {
         getLunBoTu() {
             // this.$http.get('').then(result => {
@@ -102,7 +99,7 @@ export default {
             this.ballFlag = !this.ballFlag 
             // 组成一个对象
             var goodsBuy = {
-                id: this.id,
+                id: parseInt(this.id),
                 count: this.selectedCount,
                 price: this.goodsinfo.goods_price,
                 selected: true
