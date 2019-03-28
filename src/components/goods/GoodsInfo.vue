@@ -99,7 +99,7 @@ export default {
             this.ballFlag = !this.ballFlag 
             // 组成一个对象
             var goodsBuy = {
-                id: parseInt(this.id),
+                id: this.id,
                 count: this.selectedCount,
                 price: this.goodsinfo.goods_price,
                 selected: true
